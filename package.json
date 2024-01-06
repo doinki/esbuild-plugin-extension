@@ -1,6 +1,6 @@
 {
   "name": "esbuild-plugin-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "./dist/esbuild-plugin-extension.cjs",
   "module": "./dist/esbuild-plugin-extension.js",
