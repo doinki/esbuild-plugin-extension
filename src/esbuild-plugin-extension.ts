@@ -1,5 +1,5 @@
 import { statSync } from 'node:fs';
-import { join, sep } from 'node:path';
+import { format, join, parse, sep } from 'node:path';
 
 import { type Plugin } from 'esbuild';
 
@@ -9,6 +9,13 @@ function isDirectory(path: string): boolean {
   } catch (error) {
     return false;
   }
+}
+
+function removeExtension(path: string): string {
+  const parsedPath = parse(path);
+  parsedPath.base = parsedPath.name;
+
+  return format(parsedPath);
 }
 
 export function extension(): Plugin {
@@ -22,14 +29,16 @@ export function extension(): Plugin {
           args.importer &&
           (args.path.startsWith(`..${sep}`) || args.path.startsWith(`.${sep}`))
         ) {
+          const path = removeExtension(args.path);
+
           return isDirectory(join(args.resolveDir, args.path))
             ? {
                 external: true,
-                path: `${args.path}${sep}index${ext}`,
+                path: `${path}${sep}index${ext}`,
               }
             : {
                 external: true,
-                path: `${args.path}${ext}`,
+                path: `${path}${ext}`,
               };
         }
       });
