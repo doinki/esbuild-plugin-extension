@@ -10,7 +10,9 @@ export default defineConfig({
   env: { NODE_ENV: 'production' },
   esbuildPlugins: [extension()],
   format: ['cjs', 'esm'],
-  sourcemap: true,
+  esbuildOptions: (options) => {
+    options.sourcemap = true;
+  },
   target: 'es2020',
   treeshake: true,
 });

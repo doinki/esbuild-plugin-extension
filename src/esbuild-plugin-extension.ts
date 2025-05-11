@@ -1,7 +1,7 @@
 import { statSync } from 'node:fs';
-import { format, join, parse, sep } from 'node:path';
+import { format, join, parse } from 'node:path';
 
-import { type Plugin } from 'esbuild';
+import type { Plugin } from 'esbuild';
 
 function isDirectory(path: string): boolean {
   try {
@@ -22,19 +22,19 @@ export function extension(): Plugin {
   return {
     name: 'extension',
     setup(build) {
-      const ext = build.initialOptions.outExtension?.['.js'];
+      const ext = build.initialOptions.outExtension?.['.js'] ?? '.js';
 
       build.onResolve({ filter: /.*/ }, (args) => {
         if (
           args.importer &&
-          (args.path.startsWith(`..${sep}`) || args.path.startsWith(`.${sep}`))
+          (args.path.startsWith(`../`) || args.path.startsWith(`./`))
         ) {
           const path = removeExtension(args.path);
 
           return isDirectory(join(args.resolveDir, args.path))
             ? {
                 external: true,
-                path: `${path}${sep}index${ext}`,
+                path: `${path}/index${ext}`,
               }
             : {
                 external: true,

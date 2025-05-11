@@ -2,6 +2,9 @@
   "name": "esbuild-plugin-extension",
   "version": "0.0.2",
   "license": "MIT",
+  "packageManager": "pnpm@10.10.0",
+  "sideEffects": false,
+  "type": "module",
   "main": "./dist/esbuild-plugin-extension.cjs",
   "module": "./dist/esbuild-plugin-extension.js",
   "types": "./dist/esbuild-plugin-extension.d.ts",
@@ -17,6 +20,17 @@
       }
     },
     "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc",
+    "release": "pnpm run build && changeset publish"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "esbuild": "^0.25.4",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
   },
   "author": {
     "email": "doinki94@gmail.com",
@@ -35,18 +49,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/doinki/esbuild-plugin-extension.git"
-  },
-  "sideEffects": false,
-  "type": "module",
-  "scripts": {
-    "build": "tsup",
-    "typecheck": "tsc"
-  },
-  "devDependencies": {
-    "@types/node": "^20.10.6",
-    "esbuild": "^0.19.11",
-    "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "url": "git+https://github.com/doinki/esbuild-plugin-extension.git"
   }
 }
