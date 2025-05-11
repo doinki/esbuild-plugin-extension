@@ -27,6 +27,7 @@
     "release": "pnpm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.3",
     "@types/node": "^22.15.17",
     "esbuild": "^0.25.4",
     "tsup": "^8.4.0",
