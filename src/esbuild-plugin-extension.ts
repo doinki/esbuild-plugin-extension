@@ -13,7 +13,9 @@ function isDirectory(path: string): boolean {
 
 function removeExtension(path: string): string {
   const parsedPath = parse(path);
-  parsedPath.base = parsedPath.name;
+  if (['.js', '.mjs', '.cjs'].includes(parsedPath.ext)) {
+    parsedPath.base = parsedPath.name;
+  }
 
   return format(parsedPath);
 }
